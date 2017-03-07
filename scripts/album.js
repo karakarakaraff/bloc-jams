@@ -28,6 +28,21 @@ var albumMarconi = {
      ]
 };
 
+var albumBrightEyes = {
+    title: 'Lifted, or The Story Is In The Soil',
+    artist: 'Bright Eyes',
+    label: 'Saddle Creek',
+    year: '2002',
+    albumArtUrl: 'assets/images/album_covers/10.png',
+    songs: [
+        { title: 'The Big Picture', duration: '8:42' },
+        { title: 'Method Acting', duration: '3:42' },
+        { title: 'False Advertising', duration: '5:52'},
+        { title: 'You will. You? Will. You? Will. You? Will.', duration: '3:25' },
+        { title: 'Lover I Don\'t Have to Love', duration: '4:00'}
+     ]
+};
+
 var createSongRow = function(songNumber, songName, songLength) {
     var template =
         '<tr class="album-view-song-item">'
@@ -60,5 +75,17 @@ var setCurrentAlbum = function(album) {
 };
  
 window.onload = function() {
-    setCurrentAlbum(albumPicasso);
+    var albumList = [albumPicasso, albumMarconi, albumBrightEyes];
+    var albumCoverArt = document.getElementsByClassName('album-cover-art')[0];
+    var i = 0;
+    setCurrentAlbum(albumList[0]);
+    albumCoverArt.addEventListener('click', function(event) {
+        if ((i+1) < albumList.length) {
+                i++;
+                setCurrentAlbum(albumList[i]);          
+            } else if ((i+1) === albumList.length) {
+                setCurrentAlbum(albumList[0]);
+                i = 0;
+            }
+    });
 };
