@@ -42,6 +42,10 @@ var filterTimeCode = function(timeInSeconds) {
     var lastSeconds = wholeSeconds % 60;
     var timeInPlayerBar = wholeMinutes + ':';
     
+    if (lastSeconds < 10) {
+        timeInPlayerBar += '0';
+    }
+    
     timeInPlayerBar += lastSeconds;
     return timeInPlayerBar;
 };
