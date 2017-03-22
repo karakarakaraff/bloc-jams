@@ -17,12 +17,33 @@ var seek = function(time) {
     if (currentSoundFile) {
         currentSoundFile.setTime(time);
     }
-}
+};
 
 var setVolume = function(volume) {
     if (currentSoundFile) {
         currentSoundFile.setVolume(volume);
     }
+};
+
+var setCurrentTimeInPlayerBar = function(currentTime) {
+    var $currentTimeInSong = $('.seek-control .current-time');
+    $currentTimeInSong.text(currentTime); 
+};
+
+var setTotalTimeInPlayerBar = function(totalTime) { 
+    var $totalTimeOfSong = $('.seek-control .total-time');
+    $totalTimeOfSong.text(totalTime); 
+};
+
+var filterTimeCode = function(timeInSeconds) {
+    var seconds = Number.parseFloat(timeInSeconds);
+    var wholeSeconds = Math.floor(seconds);
+    var wholeMinutes = Math.floor(wholeSeconds / 60);
+    var lastSeconds = wholeSeconds % 60;
+    var timeInPlayerBar = wholeMinutes + ':';
+    
+    timeInPlayerBar += lastSeconds;
+    return timeInPlayerBar;
 };
 
 var getSongNumberCell = function(number) {
@@ -34,7 +55,7 @@ var createSongRow = function(songNumber, songName, songLength) {
         '<tr class="album-view-song-item">'
       + '  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
       + '  <td class="song-item-title">' + songName + '</td>'
-      + '  <td class="song-item-duration">' + songLength + '</td>'
+      + '  <td class="song-item-duration">' + filterTimeCode(songLength) + '</td>'
       + '</tr>'
       ;
  
@@ -180,12 +201,11 @@ var previousSong = function() {
 };
 
 var updatePlayerBarSong = function() {
-    
     $('.currently-playing .song-name').text(currentSongFromAlbum.title);
     $('.currently-playing .artist-name').text(currentAlbum.artist);
     $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.title + " - " + currentAlbum.artist);
     $('.main-controls .play-pause').html(playerBarPauseButton);
-
+    setTotalTimeInPlayerBar(filterTimeCode(currentSongFromAlbum.duration));
 };
 
 <<<<<<< HEAD
@@ -194,8 +214,11 @@ var updateSeekBarWhileSongPlays = function() {
         currentSoundFile.bind('timeupdate', function(event) {
             var seekBarFillRatio = this.getTime() / this.getDuration();
             var $seekBar = $('.seek-control .seek-bar');
- 
             updateSeekPercentage($seekBar, seekBarFillRatio);
+            
+            var currentTime = this.getTime();
+            var songLength = this.getDuration();
+            setCurrentTimeInPlayerBar(filterTimeCode(currentTime));
         });
     }
 };
@@ -252,7 +275,6 @@ var setupSeekBars = function() {
     });
 };
 
-=======
 var togglePlayFromPlayerBar = function() {
     var currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);
     if (currentSoundFile.isPaused()) {
@@ -266,7 +288,6 @@ var togglePlayFromPlayerBar = function() {
     }
 };
 
->>>>>>> assignment-20-buzz-library
 var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
 var pauseButtonTemplate = '<a class="album-song-button"><span class="ion-pause"></span></a>';
 var playerBarPlayButton = '<span class="ion-play"></span>';
