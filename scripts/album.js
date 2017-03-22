@@ -208,7 +208,6 @@ var updatePlayerBarSong = function() {
     setTotalTimeInPlayerBar(filterTimeCode(currentSongFromAlbum.duration));
 };
 
-<<<<<<< HEAD
 var updateSeekBarWhileSongPlays = function() {
     if (currentSoundFile) {
         currentSoundFile.bind('timeupdate', function(event) {
