@@ -10,6 +10,7 @@ var setSong = function(songNumber) {
      });
     
     setVolume(currentVolume);
+    
 };
 
 var seek = function(time) {
@@ -187,6 +188,7 @@ var updatePlayerBarSong = function() {
 
 };
 
+<<<<<<< HEAD
 var updateSeekBarWhileSongPlays = function() {
     if (currentSoundFile) {
         currentSoundFile.bind('timeupdate', function(event) {
@@ -250,6 +252,21 @@ var setupSeekBars = function() {
     });
 };
 
+=======
+var togglePlayFromPlayerBar = function() {
+    var currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);
+    if (currentSoundFile.isPaused()) {
+        currentlyPlayingCell.html(pauseButtonTemplate);
+        $(this).html(playerBarPauseButton);
+        currentSoundFile.play();
+    } else if (currentSoundFile) {
+        currentlyPlayingCell.html(playButtonTemplate);
+        $(this).html(playerBarPlayButton);
+        currentSoundFile.pause();
+    }
+};
+
+>>>>>>> assignment-20-buzz-library
 var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
 var pauseButtonTemplate = '<a class="album-song-button"><span class="ion-pause"></span></a>';
 var playerBarPlayButton = '<span class="ion-play"></span>';
@@ -263,10 +280,12 @@ var currentVolume = 80;
 
 var $previousButton = $('.main-controls .previous');
 var $nextButton = $('.main-controls .next');
+var $playerBarToggle = $('.main-controls .play-pause');
 
 $(document).ready(function() {
     setCurrentAlbum(albumPicasso);
     setupSeekBars();
     $previousButton.click(previousSong);
     $nextButton.click(nextSong);
+    $playerBarToggle.click(togglePlayFromPlayerBar);
 });
