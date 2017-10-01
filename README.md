@@ -1,6 +1,6 @@
 # Bloc Jams
 
-Bloc Jams is a static streaming music website that puts all of your favorite tunes in an easy-to-use library. This project was made for [Bloc's Web Development Program](https://www.bloc.io/).
+Bloc Jams is a static streaming music website that puts all of your favorite tunes in an easy-to-use library. Read a case study about building this project on my portfolio website [karaflaherty.com: Bloc Jams](http://karaflaherty.com/bloc-jams-streaming-music-website-and-web-app/).
 
 ### Music library
 All items in the music library are organized through the `scripts/fixtures.js` file. Each album is its own object, with the album cover and songs saved in `assets/images/album_covers` and `assets/music` respectively.
@@ -27,3 +27,6 @@ Bloc Jams relies on the [Buzz! library](https://buzz.jaysalvat.com/) to play and
 
 ### Bloc Jams Angular
 To see this project reworked with the Angular framework, check out my [Bloc Jams Angular](https://github.com/karakarakaraff/bloc-jams-angular) repository.
+
+---
+This project was built for [Bloc's Web Development Program](https://www.bloc.io/).
